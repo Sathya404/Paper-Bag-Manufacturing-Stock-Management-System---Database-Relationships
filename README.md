@@ -20,6 +20,46 @@ This project is ideal for:
 
 ---
 
+## Database
+### Table Relationships
+
+| Parent Table     | Child Table      | Foreign Key(s)                                  | Description                                                                                     |
+|------------------|------------------|-------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `Models`         | `Sales`          | `Sales.Model` → `Models.Model_ID`               | Defines the relationship between the models of bags and sales orders.                            |
+| `Goods_Stock`    | `Purchase_order` | `Purchase_order.G_ID` → `Goods_Stock.G_ID`      | Specifies which goods are being restocked through purchase orders.                              |
+| `Goods_Stock`    | `pallet_info`    | `pallet_info.Goods` → `Goods_Stock.G_ID`        | Defines which goods are required for producing pallets of each model of bags.                    |
+| `Models`         | `pallet_info`    | `pallet_info.Model_ID` → `Models.Model_ID`      | Specifies which models of bags require which goods to produce a full pallet.                     |
+| `Sales`          | `Sales`          | `Sales.SO_ID` → `Sales.SO_ID` (Primary Key)     | Each sales order is uniquely identified by the sales order ID.                                   |
+| `Goods_Stock`    | `Goods_Stock`    | `Goods_Stock.G_ID` → `Goods_Stock.G_ID` (Primary Key) | Goods and raw materials are uniquely identified in the stock system.                              |
+| `Models`         | `Models`         | `Models.Model_ID` → `Models.Model_ID` (Primary Key) | Bag models are uniquely identified in the system.                                                |
+| `Purchase_order` | `Purchase_order` | `Purchase_order.PO` → `Purchase_order.PO` (Primary Key) | Each purchase order is uniquely identified by the purchase order ID.                            |
+
+### Relationships Diagram
+
+  ```plaintext
+
+     +----------------+      +---------------------+     +------------------+
+     |  Models        |      |  Sales              |     |  Goods_Stock     |
+     |----------------|      |---------------------|     |------------------|
++-->| Model_ID (PK)  |<-----| Model (FK)          |     | G_ID (PK)        |<---+
+|   |                |      | SO_ID (PK)          |     | Type             |    |
+|   |                |      | Order_Qty           |     | Specification    |    |
+|   +----------------+      +---------------------+     | Quantity         |    |
+|                                                       +------------------+    |
+|                                                                               | 
+|                                 +-------+------------------------------------+
+|                                 |       |
+|   +------------------+          |       |               +----------------------+
+|   |  Pallet_Info     |          |       |               |  Purchase_Order      |
+|   |------------------|          |       |               |----------------------|
+|   | SLNO (PK)        |          |       |               | PO (PK)              |
++---| Model_ID (FK)    |          |       +---------------| G_ID (FK)            |
+     | Goods (FK)       |----------+                       | Status               |
+     | Goods_Qty        |                                  +----------------------+
+     +------------------+
+
+
+
 ## 🛠️ Tech Stack
 
 - **Python 3.x** – Programming language  
