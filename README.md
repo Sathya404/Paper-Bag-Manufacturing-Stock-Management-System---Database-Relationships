@@ -98,8 +98,6 @@ This project is ideal for:
 
 ## 📌 Future Enhancements
 
-- Database integration (SQLite, MySQL, or PostgreSQL)
-
 - Web interface with Flask or Django
 
 - Export reports in Excel or PDF
