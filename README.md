@@ -95,8 +95,11 @@ This project is ideal for:
 
   - Check stock levels
     view_stock()
+- A complete example description is found in [Paperbag.sql](https://github.com/Sathya404/Paper-Bag-Production-Stock-Management-System/blob/main/Paperbag.sql) file
 
 ## 📌 Future Enhancements
+
+- Interact with Database like MysQl
 
 - Web interface with Flask or Django
 
